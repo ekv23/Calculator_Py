@@ -26,12 +26,18 @@ def is_float(value):
         print('not a real number, try again')
         return False
 
+def is_frac(value):
+    st = value.split('/')
+    if len(st) != 2: return False
+    if st[0].replace(' ','0').isdigit() and st[1].replace(' ','0').isdigit(): return True
+    else: return False
+
 def is_complex(value):
     try:
         complex(value)
         return True
     except ValueError:
-        print('not a real number, try again')
+        print('not a complex number, try again')
         return False
 
 def get_value(flag):
@@ -41,12 +47,15 @@ def get_value(flag):
         while(chck):
             chck = True
             if numb_type == 'r':  
-                numb_value = input("real number value (using '.'') = ")
-                if is_float(numb_value): chck = False
+                numb_value = input("real number value >> (using '.') or ([int part]space[numerat]/[denominat]) = ")
+                if is_float(numb_value) or is_frac(numb_value): chck = False
             if numb_type == 'c':  
-                numb_value = input('complex number value ([Re]+[Im]j) = ')
+                numb_value = input('complex number value >> ([Re]+[Im]j) = ')
                 if is_complex(numb_value): chck = False
-    elif flag == 1: numb_value = str(random.uniform(-10, 10))
+    elif flag == 1:
+        rd = random.randint(0,1)
+        if rd == 0: numb_value = str(random.uniform(-10, 10))
+        else: numb_value = f'{random.randint(-9,9)} {random.randint(-9,9)}/{random.randint(-9,9)}'
     elif flag == 2: numb_value = str(complex(random.uniform(-10, 10), random.uniform(-10, 10)))[1:-1]
     return numb_value
 
@@ -77,4 +86,5 @@ def view_res(flag, res):
     return res
 
 def menu_collection(flag):
-    return (get_type(flag), get_value(flag), get_value(flag), get_oper(flag))
+    get_type(flag)
+    return (get_value(flag), get_value(flag), get_oper(flag))

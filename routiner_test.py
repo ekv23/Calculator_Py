@@ -30,7 +30,7 @@ def test5_Calc_num():
     assert output == None
 
 def test6_Calc_num():
-    """Проверка деления нуля в `Calc_num` функции"""
+    """Проверка деления ноля в `Calc_num` функции"""
     output = Calc_num('0', '123.5', '/')
     assert output == 0
 
@@ -78,7 +78,7 @@ def test13_Calc_num():
     # Указываются строка 74 этого файла и строка 11 routiner_complex.py
 
 def test14_Calc_num():
-    """Проверка деления нуля в `Calc_num` функции"""
+    """Проверка деления ноля в `Calc_num` функции"""
     output = Calc_num('0.0', '7-4j', '/')
     assert output == 0
     # Тест 14 не пройден. не получается получить результат, постоянно высвечивается ошибка

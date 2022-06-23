@@ -75,7 +75,7 @@ def test13_Calc_num():
     assert output == (-2+2j)/(7-4j) 
     # Тест 13 не пройден. не получается получить результат, постоянно высвечивается ошибка
     # TypeError: float() argument must be a string or a real number, not 'complex'
-    # Указываются строка 31 этого файла и строка 11 routiner_complex.py
+    # Указываются строка 74 этого файла и строка 11 routiner_complex.py
 
 def test14_Calc_num():
     """Проверка деления нуля в `Calc_num` функции"""
@@ -83,7 +83,7 @@ def test14_Calc_num():
     assert output == 0
     # Тест 14 не пройден. не получается получить результат, постоянно высвечивается ошибка
     # TypeError: float() argument must be a string or a real number, not 'complex'
-    # Указываются строка 39 этого файла и строка 11 routiner_complex.py
+    # Указываются строка 82 этого файла и строка 11 routiner_complex.py
 
 def test15_Calc_num():
     """Проверка вычитания чисел в `Calc_num` функции"""

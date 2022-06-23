@@ -1,9 +1,10 @@
 # метод, принимающий аргументами переменные и оператор совершаемый над ними.
 
 from fractions import Fraction
+import re
 
 def calc(a,b,oper):
-    # если в полученной строку
+    # если получили строку
     if type(a) == str and type(a) == str: 
         if a.find('/') < 0 and b.find('/') < 0:
             a_real = float(a)
@@ -39,29 +40,31 @@ def operation_fraction (n1, n2, oper):
         case '*': return f'{Fraction(n1).numerator * Fraction(n2).numerator}/{Fraction(n1).denominator * Fraction(n2).denominator}'
         case '/': return f'{Fraction(n1).numerator * Fraction(n2).denominator}/{Fraction(n2).numerator * Fraction(n1).denominator}'
 
-# приводим дробь к обычному виду
+# приводим к виду простой дроби вида a/b
 def pars_fraction (number):
-    number_slash_index = number.find(' ')
-    frac_num = ''
-    if number_slash_index > 0: int_num = ''        
-    else: return number
+    ans_str = re.split(' |/', number)
+    if len(ans_str) < 3: 
+        return number
+    else: 
+        return f'{int(ans_str[0]) * int(ans_str[2]) + int(ans_str[1])}/{ans_str[2]}'
 
-    for i in range(number_slash_index):
-        int_num += str(number[i])
-    for i in range(number_slash_index + 1, len(number)):
-        frac_num += str(number[i])
-
-    return f'{Fraction(frac_num).numerator + int(int_num) * Fraction(frac_num).denominator}/{Fraction(frac_num).denominator}'
-
-# выделяем в дроби целочисленную состовляющую (если есть)
+# выделяем в дроби целочисленную состовляющую (если есть), получаем вид    x a/b
 def parce_fraction_answer (number):
-    if Fraction(number).numerator > Fraction(number).denominator:
-        int_num = str(int(Fraction(number).numerator / Fraction(number).denominator))
-        return f'{int_num} {Fraction(number).numerator - int(int_num) * Fraction(number).denominator}/{Fraction(number).denominator}'
-    elif Fraction(number).numerator * -1 > Fraction(number).denominator:
-        int_num = str(int(Fraction(number).numerator / Fraction(number).denominator))
-        return f'{int_num} {(Fraction(number).numerator - int(int_num) * Fraction(number).denominator) * -1}/{Fraction(number).denominator}'
+    ans_str = number.split('/')
+
+    if int(ans_str[0]) < 0: sign = '-'
+    else: sign = ''
+
+    if len(ans_str) < 2:
+        return number
+    elif ans_str[1] == '1':
+        return f'{ans_str[0]}'
+    elif ans_str[0] == '0':
+        return f'{ans_str[0]}'        
+    elif abs(int(ans_str[0])) == int(ans_str[1]):
+        return f'{sign}1'
+    elif abs(int(ans_str[0])) > int(ans_str[1]):
+        int_num = abs(int(int(ans_str[0]) / int(ans_str[1])))
+        return f'{sign}{int_num} {abs(int(ans_str[0])) - int_num * int(ans_str[1])}/{int(ans_str[1])}'
     else:
         return number
-
-print(calc('1 1/18', '2 3/4', '/'))

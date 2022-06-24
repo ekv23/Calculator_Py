@@ -1,6 +1,7 @@
 # метод, принимающий аргументами переменные и оператор совершаемый над ними.
 
 from fractions import Fraction
+from math import gcd
 import re
 
 def calc(a,b,oper):
@@ -23,14 +24,14 @@ def calc(a,b,oper):
 # принимает два числа с плаваюшей точкой и возвращает ответ по операции
 def operation (n1, n2, oper):
     match oper:
-        case '+': return n1 + n2
-        case '-': return n1 - n2
-        case '*': return n1 * n2
+        case '+': return str(round(n1 + n2, 2))
+        case '-': return str(round(n1 - n2, 2))
+        case '*': return str(round(n1 * n2, 2))
         case '/':
             if float(n2) == 0.0: 
                 return 'Error!!! Division by zero.'
             else: 
-                return n1 / n2
+                return str(round(n1 / n2, 2))
 
 # принимает на вход две дроби простого вида a/b и возвращает ответ операции над ними
 def operation_fraction (n1, n2, oper):
@@ -55,16 +56,25 @@ def parce_fraction_answer (number):
     if int(ans_str[0]) < 0: sign = '-'
     else: sign = ''
 
+    # если число целое, то возвращаем одно число
     if len(ans_str) < 2:
-        return number
+        return f'number'
+    # если знаменатель дроби навен 1, то возвращаем только числитель как целое число
     elif ans_str[1] == '1':
         return f'{ans_str[0]}'
+    # если числитель равен нулю - возвращаем НОЛЬ
     elif ans_str[0] == '0':
-        return f'{ans_str[0]}'        
+        return f'{ans_str[0]}'
+    # если числитель равен знаменателю - возвращаем единицу с входным знаком
     elif abs(int(ans_str[0])) == int(ans_str[1]):
         return f'{sign}1'
+    # если числитель больше знаменателя, то вычисляем целую часть дроби, сокращаем (если это возможно) дробную часть и возвращаем ответ
     elif abs(int(ans_str[0])) > int(ans_str[1]):
         int_num = abs(int(int(ans_str[0]) / int(ans_str[1])))
-        return f'{sign}{int_num} {abs(int(ans_str[0])) - int_num * int(ans_str[1])}/{int(ans_str[1])}'
+        fract_nod = gcd(int(ans_str[0]), int(ans_str[1]))
+        return f'{sign}{int_num} {int(abs(int(ans_str[0]) - int_num * int(ans_str[1])) / fract_nod)}/{int(int(ans_str[1]) / fract_nod)}'
+    # во всех остальных случаях просто сокращаем дробь (если это возможно) и возвращаем ответ
     else:
-        return number
+        fract_nod = gcd(int(ans_str[0]), int(ans_str[1]))
+        print(fract_nod)
+        return f'{sign}{int(int(ans_str[0]) / fract_nod)}/{int(int(ans_str[1]) / fract_nod)}'

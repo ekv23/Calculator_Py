@@ -23,7 +23,6 @@ def is_float(value):
         float(value)
         return True
     except ValueError:
-        print('not a real number, try again')
         return False
 
 def is_frac(value):
@@ -35,9 +34,9 @@ def is_frac(value):
 def is_complex(value):
     try:
         complex(value)
-        return True
+        if complex(value).imag == 0: return False
+        else: return True
     except ValueError:
-        print('not a complex number, try again')
         return False
 
 def get_value(flag):
@@ -49,9 +48,11 @@ def get_value(flag):
             if numb_type == 'r':  
                 numb_value = input("real number value >> (using '.') or ([int part]space[numerat]/[denominat]) = ")
                 if is_float(numb_value) or is_frac(numb_value): chck = False
+                else: print('not a real number, try again')
             if numb_type == 'c':  
                 numb_value = input('complex number value >> ([Re]+[Im]j) = ')
                 if is_complex(numb_value): chck = False
+                else: print('not a complex number, try again')
     elif flag == 1:
         rd = random.randint(0,1)
         if rd == 0: numb_value = str(random.uniform(-10, 10))

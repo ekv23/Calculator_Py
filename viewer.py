@@ -4,6 +4,7 @@ import random
 numb_type = 'r'
 numb_value = 0
 numb_oper = '+'
+rd = random.randint(0,1)
 
 def get_type(flag):
     global numb_type
@@ -54,9 +55,8 @@ def get_value(flag):
                 if is_complex(numb_value): chck = False
                 else: print('not a complex number, try again')
     elif flag == 1:
-        rd = random.randint(0,1)
         if rd == 0: numb_value = str(random.uniform(-10, 10))
-        else: numb_value = f'{random.randint(-9,9)} {random.randint(-9,9)}/{random.randint(-9,9)}'
+        else: numb_value = f'{random.randint(-9,9)} {random.randint(1,9)}/{random.randint(1,9)}'
     elif flag == 2: numb_value = str(complex(random.uniform(-10, 10), random.uniform(-10, 10)))[1:-1]
     return numb_value
 

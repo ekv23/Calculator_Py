@@ -1,4 +1,4 @@
-import logger as lr
+# import logger as lr
 import viewer as vr
 import routiner_real as rr
 import routiner_complex as rc
@@ -9,7 +9,7 @@ def frac_trans(value):
     return f'{st[0].strip()}/{st[1].strip()}' if len(st1) == 1 else f'{st1[0].strip()} {st1[1].strip()}/{st[1].strip()}'
 
 def calc(first_numb, second_numb, numb_oper):
-    lr.log_info()
+    # lr.log_info()
 
     if vr.is_float(first_numb) and vr.is_float(second_numb): 
         first_numb = (float(first_numb),)
@@ -27,5 +27,5 @@ def calc(first_numb, second_numb, numb_oper):
         return rc.calc(first_numb, second_numb, numb_oper)
     
     err = 'given numbers have different types or inappropriate format'
-    lr.log_error(err)
+    # lr.log_error(err)
     return err

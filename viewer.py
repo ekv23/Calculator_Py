@@ -40,6 +40,9 @@ def is_complex(value):
     except ValueError:
         return False
 
+def rc():
+    return random.choice([-1, 1])
+
 def get_value(flag):
     global numb_value
     if flag == 0:
@@ -56,8 +59,8 @@ def get_value(flag):
                 else: print('not a complex number, try again')
     elif flag == 1:
         if rd == 0: numb_value = str(random.uniform(-10, 10))
-        else: numb_value = f'{random.randint(-9,9)} {random.randint(1,9)}/{random.randint(1,9)}'
-    elif flag == 2: numb_value = str(complex(random.uniform(-10, 10), random.uniform(-10, 10)))[1:-1]
+        else: numb_value = f'{rc()*random.randint(1, 10)} {random.randint(1,9)}/{random.randint(1,9)}'
+    elif flag == 2: numb_value = str(complex(rc()*random.randint(1, 10), rc()*random.randint(1, 10)))[1:-1]
     return numb_value
 
 def get_oper(flag):

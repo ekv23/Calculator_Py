@@ -9,7 +9,7 @@ def frac_trans(value):
     return f'{st[0].strip()}/{st[1].strip()}' if len(st1) == 1 else f'{st1[0].strip()} {st1[1].strip()}/{st[1].strip()}'
 
 def calc(first_numb, second_numb, numb_oper):
-    lr.log_info()
+    lr.log_info(f'{first_numb} {numb_oper} {second_numb}')
 
     if vr.is_float(first_numb) and vr.is_float(second_numb): 
         first_numb = (float(first_numb),)
@@ -22,8 +22,8 @@ def calc(first_numb, second_numb, numb_oper):
         return rr.calc(first_numb, second_numb, numb_oper)
     
     if vr.is_complex(first_numb) and vr.is_complex(second_numb):
-        first_numb = str(complex(first_numb))[1:-1]
-        second_numb = str(complex(second_numb))[1:-1]
+        first_numb = str(complex(first_numb))
+        second_numb = str(complex(second_numb))
         return rc.calc(first_numb, second_numb, numb_oper)
     
     err = 'given numbers have different types or inappropriate format'

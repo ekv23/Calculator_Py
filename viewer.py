@@ -29,7 +29,7 @@ def is_float(value):
 def is_frac(value):
     st = value.split('/')
     if len(st) != 2: return False
-    if st[0].replace(' ','0').isdigit() and st[1].replace(' ','0').isdigit(): return True
+    if st[0].replace(' ','0').replace('-','0').isdigit() and st[1].replace(' ','0').isdigit(): return True
     else: return False
 
 def is_complex(value):

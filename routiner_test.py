@@ -166,8 +166,6 @@ def test27_Calc_num():
     """Проверка умножения комплексных чисел в `Calc_num` функции"""
     output = Calc_num('-2+2j', '0j', '*')
     assert output == (0)
-# Тест 27 не пройден.
-# ValueError: complex() arg is a malformed string
 
 def test28_Calc_num():
     """Проверка деления комплексных чисел в `Calc_num` функции"""

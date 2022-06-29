@@ -23,15 +23,16 @@ def calc(a,b,oper):
 
 # принимает два числа с плаваюшей точкой и возвращает ответ по операции
 def operation (n1, n2, oper):
+    round_match = max(len(str(n1).split('.')[1]), len(str(n2).split('.')[1]))    
     match oper:
-        case '+': return str(round(n1 + n2, 2))
-        case '-': return str(round(n1 - n2, 2))
-        case '*': return str(round(n1 * n2, 2))
+        case '+': return str(round(n1 + n2, round_match)) 
+        case '-': return str(round(n1 - n2, round_match))
+        case '*': return str(round(n1 * n2, round_match))
         case '/':
             if float(n2) == 0.0: 
                 return 'Error!!! Division by zero.'
             else: 
-                return str(round(n1 / n2, 2))
+                return str(round(n1 / n2, round_match))
 
 # принимает на вход две дроби простого вида a/b и возвращает ответ операции над ними
 def operation_fraction (n1, n2, oper):

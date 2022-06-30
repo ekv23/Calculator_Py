@@ -6,13 +6,13 @@ import re
 
 def calc(a,b,oper):
     # если получили строку
-    if type(a) == str and type(a) == str: 
+    if type(a) == str and type(b) == str: 
         if a.find('/') < 0 and b.find('/') < 0:
             a_real = float(a)
             b_real = float(b)
             return operation(a_real, b_real, oper)
         else:
-            if a[a.find('/') + 1] == '0' or b[b.find('/') + 1] == '0': return 'Error! Division by zero.'
+            if a[a.find('/') + 1] == '0' or b[b.find('/') + 1] == '0': return 'Division by zero'
             else: return parce_fraction_answer(operation_fraction(pars_fraction(a), pars_fraction(b), oper))
 
     # если получили кортеж
@@ -30,7 +30,7 @@ def operation (n1, n2, oper):
         case '*': return str(round(n1 * n2, round_match))
         case '/':
             if float(n2) == 0.0: 
-                return 'Error!!! Division by zero.'
+                return 'Division by zero'
             else: 
                 return str(round(n1 / n2, round_match))
 
@@ -77,5 +77,5 @@ def parce_fraction_answer (number):
     # во всех остальных случаях просто сокращаем дробь (если это возможно) и возвращаем ответ
     else:
         fract_nod = gcd(int(ans_str[0]), int(ans_str[1]))
-        print(fract_nod)
+        # print(fract_nod)
         return f'{sign}{int(int(ans_str[0]) / fract_nod)}/{int(int(ans_str[1]) / fract_nod)}'

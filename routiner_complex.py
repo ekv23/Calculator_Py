@@ -1,7 +1,7 @@
 def calc(first_arg='', second_arg='', oper=''):
     # В первую очередь проверяем, не равен ли знаменатель нулю. 
     if second_arg == '0' and oper == '/':
-        return "Null. Shall. Not. Pa-a-a-ass.\nYou can't divide by zero, sorry, not on my shift."
+        return "Division by zero"
     # Для начала, приводим входящие аргументы в надлежащий вид -- 'a+bj' --, дабы метод complex() справился корректно.
     # Проверка первого аргумента на наличие знака операции.
     for i in first_arg:

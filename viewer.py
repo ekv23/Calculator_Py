@@ -4,6 +4,7 @@ import random
 numb_type = 'r'
 numb_value = 0
 numb_oper = '+'
+rd = random.randint(0,1)
 
 def get_type(flag):
     global numb_type
@@ -23,22 +24,24 @@ def is_float(value):
         float(value)
         return True
     except ValueError:
-        print('not a real number, try again')
         return False
 
 def is_frac(value):
     st = value.split('/')
     if len(st) != 2: return False
-    if st[0].replace(' ','0').isdigit() and st[1].replace(' ','0').isdigit(): return True
+    if st[0].replace(' ','0').replace('-','0').isdigit() and st[1].replace(' ','0').isdigit(): return True
     else: return False
 
 def is_complex(value):
     try:
         complex(value)
-        return True
+        if complex(value).imag == 0: return False
+        else: return True
     except ValueError:
-        print('not a complex number, try again')
         return False
+
+def rc():
+    return random.choice([-1, 1])
 
 def get_value(flag):
     global numb_value
@@ -49,14 +52,15 @@ def get_value(flag):
             if numb_type == 'r':  
                 numb_value = input("real number value >> (using '.') or ([int part]space[numerat]/[denominat]) = ")
                 if is_float(numb_value) or is_frac(numb_value): chck = False
+                else: print('not a real number, try again')
             if numb_type == 'c':  
                 numb_value = input('complex number value >> ([Re]+[Im]j) = ')
                 if is_complex(numb_value): chck = False
+                else: print('not a complex number, try again')
     elif flag == 1:
-        rd = random.randint(0,1)
         if rd == 0: numb_value = str(random.uniform(-10, 10))
-        else: numb_value = f'{random.randint(-9,9)} {random.randint(-9,9)}/{random.randint(-9,9)}'
-    elif flag == 2: numb_value = str(complex(random.uniform(-10, 10), random.uniform(-10, 10)))[1:-1]
+        else: numb_value = f'{rc()*random.randint(1, 10)} {random.randint(1,9)}/{random.randint(1,9)}'
+    elif flag == 2: numb_value = str(complex(rc()*random.randint(1, 10), rc()*random.randint(1, 10)))[1:-1]
     return numb_value
 
 def get_oper(flag):

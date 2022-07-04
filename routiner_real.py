@@ -23,7 +23,7 @@ def calc(a,b,oper):
 
 # принимает два числа с плаваюшей точкой и возвращает ответ по операции
 def operation (n1, n2, oper):
-    round_match = max(len(str(n1).split('.')[1]), len(str(n2).split('.')[1]))    
+    round_match = max(len(str(n1).split('.')[1]), len(str(n2).split('.')[1])) 
     match oper:
         case '+': return str(round(n1 + n2, round_match)) 
         case '-': return str(round(n1 - n2, round_match))
@@ -67,11 +67,14 @@ def parce_fraction_answer (number):
     if len(ans_str) < 2:
         return f'{number}'
     # если знаменатель дроби навен 1, то возвращаем только числитель как целое число
-    elif ans_str[1] == '1':
+    elif ans_str[1] == 1:
         return f'{ans_str[0]}'
     # если числитель равен нулю - возвращаем НОЛЬ
-    elif ans_str[0] == '0':
+    elif ans_str[0] == 0:
         return f'{ans_str[0]}'
+    # если знаменатель равен нулю - возвращаем предупреждение
+    elif ans_str[1] == 0:
+        return 'Division by zero'
     # если числитель равен знаменателю - возвращаем единицу с входным знаком
     elif ans_str[0] == ans_str[1]:
         return f'{sign}1'

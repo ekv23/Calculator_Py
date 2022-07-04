@@ -156,7 +156,7 @@ def test26_Calc_num():
 
 def test27_Calc_num():
     """Проверка умножения комплексных чисел в `Calc_num` функции"""
-    output = Calc_num('-2+2j', '0', '*')
+    output = Calc_num('-2+2j', '0j', '*')
     assert output == '0j'
 #  Тест 27 не пройден.
 #  Код получает ответ 'given numbers have different types or inappropriate format',

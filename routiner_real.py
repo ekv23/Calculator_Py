@@ -23,7 +23,7 @@ def calc(a,b,oper):
 
 # принимает два числа с плаваюшей точкой и возвращает ответ по операции
 def operation (n1, n2, oper):
-    round_match = max(len(str(n1).split('.')[1]), len(str(n2).split('.')[1]))    
+    round_match = max(len(str(n1).split('.')[1]), len(str(n2).split('.')[1])) 
     match oper:
         case '+': return str(round(n1 + n2, round_match)) 
         case '-': return str(round(n1 - n2, round_match))
@@ -45,37 +45,50 @@ def operation_fraction (n1, n2, oper):
 # приводим к виду простой дроби вида a/b
 def pars_fraction (number):
     ans_str = re.split(' |/', number)
-    if len(ans_str) < 3: 
-        return number
+    sign = ''
+    if len(ans_str) > 2:
+        if int(ans_str[0]) < 0:
+            sign = '-'
+            ans_str[0] = f'{abs(int(ans_str[0]))}'
+        return f'{sign}{int(ans_str[0]) * int(ans_str[2]) + int(ans_str[1])}/{ans_str[2]}'
     else: 
-        return f'{int(ans_str[0]) * int(ans_str[2]) + int(ans_str[1])}/{ans_str[2]}'
+        return number
 
 # выделяем в дроби целочисленную состовляющую (если есть), получаем вид    x a/b
 def parce_fraction_answer (number):
-    ans_str = number.split('/')
-
-    if int(ans_str[0]) < 0: sign = '-'
-    else: sign = ''
+    ans_str = (list(map(int, number.split('/'))))
+    sign = ''
+    
+    if ans_str[0] < 0: 
+        sign = '-'
+        ans_str[0] = int(ans_str[0]) * -1
 
     # если число целое, то возвращаем одно число
     if len(ans_str) < 2:
-        return f'number'
+        return f'{number}'
     # если знаменатель дроби навен 1, то возвращаем только числитель как целое число
-    elif ans_str[1] == '1':
+    elif ans_str[1] == 1:
         return f'{ans_str[0]}'
     # если числитель равен нулю - возвращаем НОЛЬ
-    elif ans_str[0] == '0':
+    elif ans_str[0] == 0:
         return f'{ans_str[0]}'
+    # если знаменатель равен нулю - возвращаем предупреждение
+    elif ans_str[1] == 0:
+        return 'Division by zero'
     # если числитель равен знаменателю - возвращаем единицу с входным знаком
-    elif abs(int(ans_str[0])) == int(ans_str[1]):
+    elif ans_str[0] == ans_str[1]:
         return f'{sign}1'
     # если числитель больше знаменателя, то вычисляем целую часть дроби, сокращаем (если это возможно) дробную часть и возвращаем ответ
-    elif abs(int(ans_str[0])) > int(ans_str[1]):
-        int_num = abs(int(int(ans_str[0]) / int(ans_str[1])))
-        fract_nod = gcd(int(ans_str[0]), int(ans_str[1]))
-        return f'{sign}{int_num} {int(abs(int(ans_str[0]) - int_num * int(ans_str[1])) / fract_nod)}/{int(int(ans_str[1]) / fract_nod)}'
+    elif ans_str[0] > ans_str[1]:
+        int_num = int(ans_str[0] / ans_str[1])
+        fract_nod = gcd(ans_str[0], ans_str[1])
+        ans_str[0] = int(ans_str[0] / fract_nod)
+        ans_str[1] = int(ans_str[1] / fract_nod)
+        if (ans_str[0] - int_num * ans_str[1]) == 0:
+            return f'{sign}{int_num}'
+        else:
+            return f'{sign}{int_num} {ans_str[0] - int_num * ans_str[1]}/{ans_str[1]}'
     # во всех остальных случаях просто сокращаем дробь (если это возможно) и возвращаем ответ
     else:
-        fract_nod = gcd(int(ans_str[0]), int(ans_str[1]))
-        # print(fract_nod)
-        return f'{sign}{int(int(ans_str[0]) / fract_nod)}/{int(int(ans_str[1]) / fract_nod)}'
+        fract_nod = gcd(ans_str[0], ans_str[1])
+        return f'{sign}{ans_str[0] / fract_nod}/{ans_str[1] / fract_nod}'

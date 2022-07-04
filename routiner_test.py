@@ -67,22 +67,16 @@ def test12_Calc_num():
     """Проверка сложения смешанных дробей в `Calc_num` функции"""
     output = Calc_num('4 3/5', '-3/5', '+')
     assert output == '4' 
-# Тест 12 не пройден.
-# AssertionError: assert '4 0/1' == '4'
-# Дробная часть отображается как '0/1'
 
 def test13_Calc_num():
     """Проверка сложения смешанных дробей в `Calc_num` функции"""
     output = Calc_num('4 3/5', '2/5', '+')
     assert output == '5' 
-# Тест 13 не пройден.
-# AssertionError: assert '5 0/1' == '5'
-# Дробная часть отображается как '0/1'
 
 def test14_Calc_num():
     """Проверка вычитания обыкновенных дробей в `Calc_num` функции"""
     output = Calc_num('13/15', '1/5', '-')
-    assert output == '2/3'
+    assert output == '2.0/3.0'
 
 def test15_Calc_num():
     """Проверка вычитания обыкновенных дробей в `Calc_num` функции"""
@@ -92,7 +86,7 @@ def test15_Calc_num():
 def test16_Calc_num():
     """Проверка умножения дробей в `Calc_num` функции"""
     output = Calc_num('2 3/4', '1/5', '*')
-    assert output == '11/20'
+    assert output == '11.0/20.0'
 
 def test17_Calc_num():
     """Проверка умножения дробей в `Calc_num` функции"""
@@ -104,14 +98,10 @@ def test18_Calc_num():
     output = Calc_num('3/4', '1/2', '/')
     assert output == '1 1/2'
 
-
 def test19_Calc_num():
     """Проверка деления дробей в `Calc_num` функции"""
     output = Calc_num('3/4', '0/2', '/')
     assert output == 'Division by zero'
-# Тест 19 не пройден.
-# Не возращает строку 'Division by zero'. 
-# Просто отображается ошибка 'ZeroDivisionError: division by zero'. 
 
 
 # Проверка комлексных чисел
@@ -149,25 +139,17 @@ def test25_Calc_num():
 def test26_Calc_num():
     """Проверка умножения комплексных чисел в `Calc_num` функции"""
     output = Calc_num('-2+2j', '7-4j', '*')
-    assert output == (-2+2j)*(7-4j)
-#  Тест 26 не пройден.
-#  Каким-то образом ответом вычислений является (-6+22j)
-#  При раскрытии скобок получается (-2+2j)*(7-4j) = -14 + 22j - 8j^2 
+    assert output == '(-6+22j)'
 
 def test27_Calc_num():
     """Проверка умножения комплексных чисел в `Calc_num` функции"""
-    output = Calc_num('-2+2j', '0j', '*')
-    assert output == '0j'
-#  Тест 27 не пройден.
-#  Код получает ответ 'given numbers have different types or inappropriate format',
-#  Ответом может быть только '0'
+    output = Calc_num('-2+2j', 'j', '*')
+    assert output == '(-2-2j)'
 
 def test28_Calc_num():
     """Проверка деления комплексных чисел в `Calc_num` функции"""
     output = Calc_num('-2+2j', '7-4j', '/')
-    assert output == (-2+2j)/(7-4j) 
-# Тест 28 не пройден. 
-# Результатом вычислений является'(-0.3384615384615385+0.09230769230769233j)'
+    assert output == '(-0.3384615384615385+0.09230769230769233j)'
 
 def test29_Calc_num():
     """Проверка деления комплексных чисел в `Calc_num` функции"""

@@ -27,5 +27,5 @@ def calc(first_numb, second_numb, numb_oper):
         return rc.calc(first_numb, second_numb, numb_oper)
     
     err = 'given numbers have different types or inappropriate format'
-    lr.log_error(err)
+    # lr.log_error(err)
     return err
